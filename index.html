@@ -21,8 +21,8 @@
             mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
-            bgDark: '#060608',
-            cardBg: '#0e0e15',
+            bgDark: '#07070a',
+            cardBg: '#0f0f15',
             flameRed: '#ff3b20',
             flameOrange: '#ff8a00',
           }
@@ -33,34 +33,38 @@
 
   <style>
     body {
-      background-color: #060608;
+      background-color: #07070a;
       color: #f3f4f6;
       overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Фирменная фоновая сетка Кирилла */
+    /* Фоновая сетка */
     .cyber-grid {
-      background-size: 44px 44px;
+      background-size: 36px 36px;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
     }
 
-    /* Огненный градиент */
-    .fire-gradient {
-      background: linear-gradient(135deg, #ff3b20 0%, #ff8a00 100%);
-    }
-
+    /* Огненный градиент текста */
     .fire-text {
       background: linear-gradient(135deg, #ffffff 10%, #ff4b2b 60%, #ff9000 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Шапка-остров в оригинальных пропорциях */
-    .app-header {
-      background: rgba(13, 13, 19, 0.85);
+    /* Шапка на мобилке */
+    .mobile-header-bar {
+      background: rgba(14, 14, 20, 0.92);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* Шапка на ПК */
+    .desktop-header-bar {
+      background: rgba(14, 14, 20, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 
         inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
@@ -69,26 +73,26 @@
       -webkit-backdrop-filter: blur(20px);
     }
 
-    /* Мощные объемные плашки масштаба WAIK */
+    /* Объемные плашки WAIK */
     .waik-card {
-      background: linear-gradient(180deg, #12121b 0%, #0a0a10 100%);
+      background: linear-gradient(180deg, #13131c 0%, #0b0b11 100%);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 32px;
+      border-radius: 28px;
       box-shadow: 
         inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
-        0 20px 45px -10px rgba(0, 0, 0, 0.85);
+        0 16px 36px -10px rgba(0, 0, 0, 0.85);
       position: relative;
       overflow: hidden;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .waik-card:hover {
       border-color: rgba(255, 75, 43, 0.45);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       box-shadow: 
-        inset 0 1px 2px 0 rgba(255, 255, 255, 0.22),
-        0 25px 50px -10px rgba(0, 0, 0, 0.95),
-        0 0 35px -5px rgba(255, 59, 32, 0.22);
+        inset 0 1px 2px 0 rgba(255, 255, 255, 0.2),
+        0 20px 45px -10px rgba(0, 0, 0, 0.95),
+        0 0 30px -5px rgba(255, 59, 32, 0.25);
     }
 
     /* 3D Кнопки */
@@ -100,138 +104,147 @@
         0 8px 25px rgba(255, 59, 32, 0.45);
       transition: all 0.25s ease;
     }
-    .btn-fire:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        inset 0 1px 2px 0 rgba(255, 255, 255, 0.5),
-        0 12px 30px rgba(255, 59, 32, 0.65);
-    }
     .btn-fire:active {
       transform: scale(0.97);
     }
 
     .btn-dark {
-      background: linear-gradient(180deg, #1e1e2b 0%, #101017 100%);
+      background: linear-gradient(180deg, #1d1d28 0%, #111117 100%);
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
       transition: all 0.25s ease;
-    }
-    .btn-dark:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.2);
     }
     .btn-dark:active {
       transform: scale(0.97);
     }
 
     .pill-tag {
-      background: #141420;
+      background: #13131c;
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      transition: all 0.25s ease;
-    }
-    .pill-tag:hover {
-      border-color: rgba(255, 138, 0, 0.35);
-      transform: translateY(-2px);
     }
   </style>
 </head>
 <body class="cyber-grid antialiased font-sans">
 
   <!-- Плавающая кнопка Telegram -->
-  <a href="https://t.me/beloysa" target="_blank" class="fixed bottom-7 right-6 z-50 p-4 rounded-full btn-fire flex items-center justify-center text-white shadow-2xl active:scale-90 transition duration-200" title="Написать в Telegram @beloysa">
+  <a href="https://t.me/beloysa" target="_blank" class="fixed bottom-6 right-5 z-50 p-3.5 sm:p-4 rounded-full btn-fire flex items-center justify-center text-white shadow-2xl active:scale-90 transition duration-200" title="Написать в Telegram @beloysa">
     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
   </a>
 
-  <!-- Верхняя подсветка -->
-  <div class="fixed top-[-15%] left-1/2 -translate-x-1/2 w-[80vw] max-w-[850px] h-[450px] bg-flameRed/15 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <!-- Верхняя фоновая подсветка -->
+  <div class="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[85vw] max-w-[850px] h-[350px] bg-flameRed/15 rounded-full blur-[120px] pointer-events-none -z-10"></div>
 
-  <!-- ШАПКА / НАВИГАЦИЯ -->
-  <header class="sticky top-5 z-40 max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="app-header rounded-full px-6 sm:px-8 py-3.5 flex items-center justify-between">
-      
-      <!-- Логотип MLT -->
+  <!-- ШАПКА САЙТА -->
+  <header class="fixed top-0 left-0 right-0 z-40 md:top-5 md:max-w-6xl md:mx-auto md:px-6">
+    
+    <!-- Мобильная шапка -->
+    <div class="md:hidden mobile-header-bar px-5 py-3.5 flex items-center justify-between">
+      <a href="#" class="font-display font-black text-2xl tracking-wider text-white">
+        MLT
+      </a>
+      <button id="burger-btn" class="p-2 rounded-xl bg-white/[0.04] border border-white/10 text-gray-200 active:scale-95 focus:outline-none">
+        <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Мобильное выпадающее меню -->
+    <div id="mobile-menu" class="hidden md:hidden mobile-header-bar px-6 py-5 flex flex-col space-y-4 shadow-2xl">
+      <a href="#about" class="text-gray-200 text-lg font-semibold py-1 border-b border-white/5" onclick="closeMenu()">О нас</a>
+      <a href="#projects" class="text-gray-200 text-lg font-semibold py-1 border-b border-white/5" onclick="closeMenu()">Проекты</a>
+      <a href="#ecosystem" class="text-gray-200 text-lg font-semibold py-1 border-b border-white/5" onclick="closeMenu()">Экосистема</a>
+      <a href="#contact" class="text-gray-200 text-lg font-semibold py-1 border-b border-white/5" onclick="closeMenu()">Контакты</a>
+      <div class="flex gap-3 pt-2">
+        <a href="https://t.me/beloysa" target="_blank" class="flex-1 py-3 text-center rounded-xl btn-fire text-white text-sm font-bold">Telegram</a>
+        <a href="https://instagram.com/your_instagram" target="_blank" class="flex-1 py-3 text-center rounded-xl btn-dark text-gray-200 text-sm font-bold">Instagram</a>
+      </div>
+    </div>
+
+    <!-- Шапка для ПК -->
+    <div class="hidden md:flex desktop-header-bar rounded-full px-8 py-3.5 items-center justify-between">
       <a href="#" class="font-display font-black text-2xl tracking-tight text-white hover:opacity-90 transition">
         MLT
       </a>
 
-      <!-- Меню для ПК -->
-      <nav class="hidden md:flex items-center space-x-1.5 text-sm font-semibold">
+      <nav class="flex items-center space-x-2 text-sm font-semibold">
         <a href="#about" class="px-5 py-2.5 rounded-full text-gray-300 hover:text-white hover:bg-white/[0.04] transition">О нас</a>
         <a href="#projects" class="px-5 py-2.5 rounded-full text-gray-300 hover:text-white hover:bg-white/[0.04] transition">Проекты</a>
         <a href="#ecosystem" class="px-5 py-2.5 rounded-full text-gray-300 hover:text-white hover:bg-white/[0.04] transition">Услуги</a>
         <a href="#contact" class="px-6 py-2.5 rounded-full btn-fire text-white font-bold">Контакты</a>
       </nav>
 
-      <!-- Кнопки справа -->
       <div class="flex items-center space-x-2.5">
-        <a href="https://t.me/beloysa" target="_blank" class="px-5 sm:px-6 py-2.5 rounded-full btn-fire text-white text-xs sm:text-sm font-bold">
+        <a href="https://t.me/beloysa" target="_blank" class="px-6 py-2.5 rounded-full btn-fire text-white text-sm font-bold">
           Telegram
         </a>
-        <a href="https://instagram.com/your_instagram" target="_blank" class="px-5 sm:px-6 py-2.5 rounded-full btn-dark text-gray-200 hover:text-white text-xs sm:text-sm font-bold">
+        <a href="https://instagram.com/your_instagram" target="_blank" class="px-6 py-2.5 rounded-full btn-dark text-gray-200 hover:text-white text-sm font-bold">
           Instagram
         </a>
       </div>
-
     </div>
+
   </header>
 
-  <!-- ОСНОВНОЙ КОНТЕНТ (Широкий мощный контейнер max-w-6xl) -->
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 md:pt-20 pb-28">
+  <!-- ОСНОВНОЙ КОНТЕНТ (pt-28 на телефоне, чтобы ничего не заезжало под шапку) -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-24 md:pt-32 pb-28">
 
     <!-- 1. HERO СЕКЦИЯ -->
-    <div class="flex flex-col lg:grid lg:grid-cols-12 gap-10 md:gap-14 items-center">
+    <div class="flex flex-col lg:grid lg:grid-cols-12 gap-8 md:gap-14 items-center">
       
       <div class="w-full lg:col-span-7">
         
         <!-- Бейдж TELEGRAM CHANNEL -->
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-flameRed/10 border border-flameRed/30 text-flameOrange mb-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-flameRed/10 border border-flameRed/30 text-flameOrange mb-5">
           <svg class="w-3.5 h-3.5 fill-current text-flameRed animate-pulse" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
           <span>Telegram Channel</span>
         </div>
 
         <!-- Заголовок MLT TEAM -->
-        <h1 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-[96px] font-black tracking-tight leading-[0.92] mb-6">
+        <h1 class="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[92px] font-black tracking-tight leading-[0.92] mb-5">
           MLT<br/>
           <span class="fire-text">TEAM</span>
         </h1>
 
         <!-- Описание -->
-        <p class="text-gray-300 text-lg sm:text-xl leading-relaxed mb-9 font-normal max-w-xl">
+        <p class="text-gray-300 text-base sm:text-xl leading-relaxed mb-8 font-normal max-w-xl">
           Мы, вместе с командой, создаем Telegram-экосистему, развиваем Web3-проекты и помогаем людям начать зарабатывать.
         </p>
 
-        <!-- Кнопка Telegram -->
-        <div class="mb-10">
+        <!-- Кнопка Telegram на @beloysa -->
+        <div class="mb-8">
           <a href="https://t.me/beloysa" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 rounded-2xl btn-fire font-bold text-white text-base shadow-xl">
             <span>Telegram</span>
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
           </a>
         </div>
 
-        <!-- 3 карточки статистики (Крупные и пропорциональные) -->
-        <div class="grid grid-cols-3 gap-3.5 sm:gap-5 mb-7">
-          <div class="waik-card p-5 sm:p-6 text-center sm:text-left">
-            <div class="font-display text-2xl sm:text-4xl font-black text-white">5+</div>
-            <div class="text-xs sm:text-sm text-gray-400 font-medium mt-1.5">Проектов</div>
+        <!-- 3 карточки статистики (Идеальный шрифт Plus Jakarta Sans, чтобы буквы не резало) -->
+        <div class="grid grid-cols-3 gap-2.5 sm:gap-5 mb-6">
+          <div class="waik-card p-4 sm:p-6 text-center">
+            <div class="font-sans font-black text-2xl sm:text-4xl text-white tracking-tight">5+</div>
+            <div class="text-[11px] sm:text-sm text-gray-400 font-medium mt-1">Проектов</div>
           </div>
-          <div class="waik-card p-5 sm:p-6 text-center sm:text-left">
-            <div class="font-display text-2xl sm:text-4xl font-black text-white">24/7</div>
-            <div class="text-xs sm:text-sm text-gray-400 font-medium mt-1.5">Поддержка</div>
+          <div class="waik-card p-4 sm:p-6 text-center">
+            <div class="font-sans font-black text-2xl sm:text-4xl text-white tracking-tight">24/7</div>
+            <div class="text-[11px] sm:text-sm text-gray-400 font-medium mt-1">Поддержка</div>
           </div>
-          <div class="waik-card p-5 sm:p-6 text-center sm:text-left">
-            <div class="font-display text-2xl sm:text-4xl font-black fire-text">MLT</div>
-            <div class="text-xs sm:text-sm text-gray-400 font-medium mt-1.5">Экосистема</div>
+          <div class="waik-card p-4 sm:p-6 text-center">
+            <div class="font-sans font-black text-2xl sm:text-4xl fire-text tracking-tight">MLT</div>
+            <div class="text-[11px] sm:text-sm text-gray-400 font-medium mt-1">Экосистема</div>
           </div>
         </div>
 
         <!-- 2 тега доверия -->
-        <div class="flex flex-col sm:flex-row gap-3">
-          <div class="pill-tag px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-semibold text-gray-200 flex items-center justify-center sm:justify-start gap-3">
+        <div class="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
+          <div class="pill-tag px-5 sm:px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-semibold text-gray-200 flex items-center justify-center sm:justify-start gap-3">
             <span class="text-flameOrange text-base">👥</span>
             <span>MLT Community</span>
           </div>
-          <div class="pill-tag px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-semibold text-gray-200 flex items-center justify-center sm:justify-start gap-3">
+          <div class="pill-tag px-5 sm:px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-semibold text-gray-200 flex items-center justify-center sm:justify-start gap-3">
             <span class="text-flameRed text-base">🛠️</span>
             <span>Web3 Builder</span>
           </div>
@@ -240,10 +253,10 @@
       </div>
 
       <!-- Контейнер под фото -->
-      <div class="w-full lg:col-span-5 flex justify-center lg:justify-end">
+      <div class="w-full lg:col-span-5 flex justify-center lg:justify-end mt-4 lg:mt-0">
         <div class="w-full max-w-[440px] aspect-[4/5] rounded-[32px] waik-card p-2.5 relative overflow-hidden group shadow-2xl">
           <div class="w-full h-full rounded-[24px] bg-gradient-to-tr from-zinc-950 via-zinc-900 to-zinc-800 flex flex-col items-center justify-center text-center p-8 relative border border-white/5 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#060608] via-transparent to-transparent opacity-85 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#07070a] via-transparent to-transparent opacity-85 pointer-events-none"></div>
 
             <div class="w-20 h-20 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-gray-400 mb-4 shadow-inner group-hover:scale-105 transition duration-300">
               <svg class="w-10 h-10 stroke-current text-flameOrange" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -257,52 +270,51 @@
 
     </div>
 
-    <!-- 2. БЛОК «О НАС» (Точные пропорции Кирилла с ПК скриншота 4 и 5) -->
-    <section id="about" class="mt-28 md:mt-36">
-      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-black text-center mb-12 md:mb-16 tracking-tight">О нас</h2>
+    <!-- 2. БЛОК «О НАС» -->
+    <section id="about" class="mt-24 md:mt-36">
+      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-black text-center mb-10 md:mb-16 tracking-tight">О нас</h2>
 
-      <!-- Сетка 2 колонок в полном масштабе -->
-      <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-7 items-stretch">
+      <div class="space-y-5 md:space-y-0 md:grid md:grid-cols-2 md:gap-7 items-stretch">
         
         <!-- Карточка: Кто мы -->
-        <div class="waik-card p-8 sm:p-11 flex flex-col justify-start">
-          <div class="inline-flex items-center gap-3.5 text-2xl font-bold mb-7 text-white">
-            <span class="text-flameOrange text-2xl">✋</span>
+        <div class="waik-card p-6 sm:p-11 flex flex-col justify-start">
+          <div class="inline-flex items-center gap-3.5 text-xl sm:text-2xl font-bold mb-5 sm:mb-7 text-white">
+            <span class="text-flameOrange">✋</span>
             <span>Кто мы</span>
           </div>
-          <p class="text-gray-100 text-lg sm:text-xl font-medium leading-relaxed mb-5">
+          <p class="text-gray-100 text-base sm:text-xl font-medium leading-relaxed mb-4 sm:mb-5">
             Мы команда <strong class="text-white font-extrabold">MLT</strong>.
           </p>
-          <p class="text-gray-400 text-base sm:text-lg leading-relaxed mb-5 font-normal">
+          <p class="text-gray-400 text-sm sm:text-lg leading-relaxed mb-4 sm:mb-5 font-normal">
             Развиваемся в сфере психологии, Web3, программирования и Digital-проектов.
           </p>
-          <p class="text-gray-400 text-base sm:text-lg leading-relaxed font-normal">
+          <p class="text-gray-400 text-sm sm:text-lg leading-relaxed font-normal">
             Создаем собственную экосистему, объединяем сильных людей и делимся практическим опытом.
           </p>
         </div>
 
         <!-- Карточка: Основные направления -->
-        <div class="waik-card p-8 sm:p-11 flex flex-col justify-between">
+        <div class="waik-card p-6 sm:p-11 flex flex-col justify-between">
           <div>
-            <div class="inline-flex items-center gap-3.5 text-2xl font-bold mb-7 text-white">
-              <span class="text-flameRed text-2xl">🎯</span>
+            <div class="inline-flex items-center gap-3.5 text-xl sm:text-2xl font-bold mb-5 sm:mb-7 text-white">
+              <span class="text-flameRed">🎯</span>
               <span>Основные направления</span>
             </div>
-            <ul class="space-y-4">
-              <li class="flex items-center justify-between text-gray-200 text-base sm:text-lg font-medium pb-4 border-b border-white/[0.06]">
-                <span class="flex items-center gap-3.5"><span class="text-flameOrange">📈</span> Psychology</span>
+            <ul class="space-y-3.5 sm:space-y-4">
+              <li class="flex items-center justify-between text-gray-200 text-sm sm:text-lg font-medium pb-3.5 sm:pb-4 border-b border-white/[0.06]">
+                <span class="flex items-center gap-3 sm:gap-3.5"><span class="text-flameOrange">📈</span> Psychology</span>
                 <span class="text-xs font-mono text-gray-500">01</span>
               </li>
-              <li class="flex items-center justify-between text-gray-200 text-base sm:text-lg font-medium pb-4 border-b border-white/[0.06]">
-                <span class="flex items-center gap-3.5"><span class="text-flameRed">🌐</span> Web3</span>
+              <li class="flex items-center justify-between text-gray-200 text-sm sm:text-lg font-medium pb-3.5 sm:pb-4 border-b border-white/[0.06]">
+                <span class="flex items-center gap-3 sm:gap-3.5"><span class="text-flameRed">🌐</span> Web3</span>
                 <span class="text-xs font-mono text-gray-500">02</span>
               </li>
-              <li class="flex items-center justify-between text-gray-200 text-base sm:text-lg font-medium pb-4 border-b border-white/[0.06]">
-                <span class="flex items-center gap-3.5"><span class="text-flameOrange">🤝</span> MLT Community</span>
+              <li class="flex items-center justify-between text-gray-200 text-sm sm:text-lg font-medium pb-3.5 sm:pb-4 border-b border-white/[0.06]">
+                <span class="flex items-center gap-3 sm:gap-3.5"><span class="text-flameOrange">🤝</span> MLT Community</span>
                 <span class="text-xs font-mono text-gray-500">03</span>
               </li>
-              <li class="flex items-center justify-between text-gray-200 text-base sm:text-lg font-medium pt-1">
-                <span class="flex items-center gap-3.5"><span class="text-flameRed">🚀</span> Digital Products</span>
+              <li class="flex items-center justify-between text-gray-200 text-sm sm:text-lg font-medium pt-1">
+                <span class="flex items-center gap-3 sm:gap-3.5"><span class="text-flameRed">🚀</span> Digital Products</span>
                 <span class="text-xs font-mono text-gray-500">04</span>
               </li>
             </ul>
@@ -311,53 +323,53 @@
 
       </div>
 
-      <!-- Широкая плашка «Сейчас развиваем» (как скриншот 5) -->
-      <div class="mt-6 md:mt-7 waik-card p-8 sm:p-11 text-center">
-        <h3 class="text-xl sm:text-2xl font-bold mb-7 flex items-center justify-center gap-3 text-white">
+      <!-- Плашка «Сейчас развиваем» -->
+      <div class="mt-5 sm:mt-7 waik-card p-6 sm:p-11 text-center">
+        <h3 class="text-lg sm:2xl font-bold mb-5 sm:mb-7 flex items-center justify-center gap-2.5 text-white">
           <span class="text-flameRed">🚀</span>
           <span>Сейчас развиваем</span>
         </h3>
-        <div class="flex flex-col sm:flex-row justify-center gap-3.5">
-          <span class="pill-tag px-7 py-3.5 rounded-2xl text-sm sm:text-base font-semibold text-gray-200">
+        <div class="flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-3.5">
+          <span class="pill-tag px-6 sm:px-7 py-3 sm:py-3.5 rounded-2xl text-xs sm:text-base font-semibold text-gray-200">
             MLT Community
           </span>
-          <span class="pill-tag px-7 py-3.5 rounded-2xl text-sm sm:text-base font-semibold text-gray-200">
+          <span class="pill-tag px-6 sm:px-7 py-3 sm:py-3.5 rounded-2xl text-xs sm:text-base font-semibold text-gray-200">
             Psychology
           </span>
-          <span class="pill-tag px-7 py-3.5 rounded-2xl text-sm sm:text-base font-semibold text-gray-200">
+          <span class="pill-tag px-6 sm:px-7 py-3 sm:py-3.5 rounded-2xl text-xs sm:text-base font-semibold text-gray-200">
             Telegram Channel
           </span>
         </div>
       </div>
     </section>
 
-    <!-- 3. БЛОК «НАШИ ПРОЕКТЫ» (как скриншот 6) -->
-    <section id="projects" class="mt-28 md:mt-36">
-      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-black text-center mb-12 md:mb-16 tracking-tight">Наши проекты</h2>
+    <!-- 3. БЛОК «НАШИ ПРОЕКТЫ» -->
+    <section id="projects" class="mt-24 md:mt-36">
+      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-black text-center mb-10 md:mb-16 tracking-tight">Наши проекты</h2>
 
-      <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-7">
+      <div class="space-y-5 md:space-y-0 md:grid md:grid-cols-2 md:gap-7">
         <!-- Карточка MLT Community -->
-        <div class="waik-card p-8 sm:p-11 flex flex-col justify-between group min-h-[360px]">
+        <div class="waik-card p-6 sm:p-11 flex flex-col justify-between group min-h-[320px] sm:min-h-[360px]">
           <div>
-            <div class="w-14 h-14 rounded-2xl btn-fire flex items-center justify-center text-white mb-6 text-2xl shadow-lg">
+            <div class="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl btn-fire flex items-center justify-center text-white mb-5 sm:mb-6 text-xl sm:text-2xl shadow-lg">
               🚀
             </div>
-            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white mb-3.5">
+            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white mb-3">
               MLT Community
             </h3>
-            <p class="text-gray-400 text-base leading-relaxed mb-7 font-light">
+            <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6 font-light">
               Сообщество для тех, кто развивается в психологии, Web3 и кодинге. Новости рынка, аналитика, образовательные материалы и совместное развитие.
             </p>
-            <div class="flex flex-wrap gap-2.5 mb-8">
-              <span class="pill-tag px-4 py-2 rounded-xl text-xs font-mono text-gray-300">Psychology</span>
-              <span class="pill-tag px-4 py-2 rounded-xl text-xs font-mono text-gray-300">Web3</span>
-              <span class="pill-tag px-4 py-2 rounded-xl text-xs font-mono text-gray-300">Coding</span>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="pill-tag px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-mono text-gray-300">Psychology</span>
+              <span class="pill-tag px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-mono text-gray-300">Web3</span>
+              <span class="pill-tag px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-mono text-gray-300">Coding</span>
             </div>
           </div>
           <div>
-            <a href="https://t.me/beloysa" target="_blank" class="inline-flex items-center gap-2.5 text-base font-bold text-white group-hover:text-flameOrange transition">
+            <a href="https://t.me/beloysa" target="_blank" class="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-white group-hover:text-flameOrange transition">
               <span>Подробнее</span>
-              <span class="text-flameRed group-hover:translate-x-2 transition duration-200 text-lg">→</span>
+              <span class="text-flameRed group-hover:translate-x-1.5 transition">→</span>
             </a>
           </div>
         </div>
@@ -371,65 +383,65 @@
       </div>
     </section>
 
-    <!-- 4. БЛОК «ЭКОСИСТЕМА MLT» (как скриншот 7: 3 сверху + 2 снизу) -->
-    <section id="ecosystem" class="mt-28 md:mt-36">
-      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-black text-center mb-12 md:mb-16 tracking-tight">Экосистема MLT</h2>
+    <!-- 4. БЛОК «ЭКОСИСТЕМА MLT» -->
+    <section id="ecosystem" class="mt-24 md:mt-36">
+      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-black text-center mb-10 md:mb-16 tracking-tight">Экосистема MLT</h2>
 
-      <div class="space-y-6">
+      <div class="space-y-4 sm:space-y-6">
         <!-- Верхний ряд: 3 плашки -->
         <div class="space-y-4 md:space-y-0 md:grid md:grid-cols-3 md:gap-6">
-          <div class="waik-card p-8 min-h-[220px] flex flex-col justify-between">
-            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-400">01</div>
-            <p class="text-sm text-gray-500 font-mono">[ Свободная плашка 1 ]</p>
+          <div class="waik-card p-6 sm:p-8 min-h-[170px] sm:min-h-[220px] flex flex-col justify-between">
+            <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xs sm:text-sm font-mono text-gray-400">01</div>
+            <p class="text-xs sm:text-sm text-gray-500 font-mono">[ Свободная плашка 1 ]</p>
           </div>
-          <div class="waik-card p-8 min-h-[220px] flex flex-col justify-between">
-            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-400">02</div>
-            <p class="text-sm text-gray-500 font-mono">[ Свободная плашка 2 ]</p>
+          <div class="waik-card p-6 sm:p-8 min-h-[170px] sm:min-h-[220px] flex flex-col justify-between">
+            <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xs sm:text-sm font-mono text-gray-400">02</div>
+            <p class="text-xs sm:text-sm text-gray-500 font-mono">[ Свободная плашка 2 ]</p>
           </div>
-          <div class="waik-card p-8 min-h-[220px] flex flex-col justify-between">
-            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-400">03</div>
-            <p class="text-sm text-gray-500 font-mono">[ Свободная плашка 3 ]</p>
+          <div class="waik-card p-6 sm:p-8 min-h-[170px] sm:min-h-[220px] flex flex-col justify-between">
+            <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xs sm:text-sm font-mono text-gray-400">03</div>
+            <p class="text-xs sm:text-sm text-gray-500 font-mono">[ Свободная плашка 3 ]</p>
           </div>
         </div>
 
         <!-- Нижний ряд: 2 плашки в ширину -->
         <div class="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-6">
-          <div class="waik-card p-8 min-h-[220px] flex flex-col justify-between">
-            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-400">04</div>
-            <p class="text-sm text-gray-500 font-mono">[ Свободная плашка 4 ]</p>
+          <div class="waik-card p-6 sm:p-8 min-h-[170px] sm:min-h-[220px] flex flex-col justify-between">
+            <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xs sm:text-sm font-mono text-gray-400">04</div>
+            <p class="text-xs sm:text-sm text-gray-500 font-mono">[ Свободная плашка 4 ]</p>
           </div>
-          <div class="waik-card p-8 min-h-[220px] flex flex-col justify-between">
-            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-400">05</div>
-            <p class="text-sm text-gray-500 font-mono">[ Свободная плашка 5 ]</p>
+          <div class="waik-card p-6 sm:p-8 min-h-[170px] sm:min-h-[220px] flex flex-col justify-between">
+            <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xs sm:text-sm font-mono text-gray-400">05</div>
+            <p class="text-xs sm:text-sm text-gray-500 font-mono">[ Свободная плашка 5 ]</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5. БЛОК «СВЯЖИТЕСЬ С НАМИ» (как скриншот 8) -->
-    <section id="contact" class="mt-28 md:mt-36">
-      <div class="waik-card p-8 sm:p-16 md:p-20 text-center max-w-4xl mx-auto relative overflow-hidden">
-        <div class="absolute -top-28 left-1/2 -translate-x-1/2 w-[450px] md:w-[600px] h-[300px] bg-flameRed/20 rounded-full blur-[110px] pointer-events-none"></div>
+    <!-- 5. БЛОК «СВЯЖИТЕСЬ С НАМИ» -->
+    <section id="contact" class="mt-24 md:mt-36">
+      <div class="waik-card p-7 sm:p-16 md:p-20 text-center max-w-4xl mx-auto relative overflow-hidden">
+        <div class="absolute -top-28 left-1/2 -translate-x-1/2 w-[350px] md:w-[600px] h-[300px] bg-flameRed/20 rounded-full blur-[110px] pointer-events-none"></div>
 
-        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold pill-tag text-gray-300 mb-6">
+        <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold pill-tag text-gray-300 mb-5 sm:mb-6">
           <span>📩</span>
           <span>Всегда на связи</span>
         </div>
 
-        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-black mb-5 tracking-tight text-white">
+        <h2 class="font-display text-3xl sm:text-5xl md:text-6xl font-black mb-4 sm:mb-5 tracking-tight text-white">
           Свяжитесь с нами
         </h2>
 
-        <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+        <p class="text-gray-300 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10 font-light">
           По вопросам сотрудничества, партнерства, рекламы или участия в проектах — пишите в Telegram или Instagram. Отвечаем лично.
         </p>
 
         <!-- Кнопки -->
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="https://t.me/beloysa" target="_blank" class="w-full sm:w-auto px-11 py-4 rounded-2xl btn-fire font-bold text-white text-base shadow-xl">
+        <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+          <a href="https://t.me/beloysa" target="_blank" class="w-full sm:w-auto px-10 sm:px-11 py-4 rounded-2xl btn-fire font-bold text-white text-base shadow-xl">
             Telegram
           </a>
-          <a href="https://instagram.com/your_instagram" target="_blank" class="w-full sm:w-auto px-11 py-4 rounded-2xl btn-dark font-bold text-gray-200 hover:text-white text-base">
+          <a href="https://instagram.com/your_instagram" target="_blank" class="w-full sm:w-auto px-10 sm:px-11 py-4 rounded-2xl btn-dark font-bold text-gray-200 hover:text-white text-base">
             Instagram
           </a>
         </div>
@@ -439,15 +451,15 @@
   </main>
 
   <!-- 6. ФУТЕР -->
-  <footer class="border-t border-white/[0.06] py-16 text-center mt-12">
+  <footer class="border-t border-white/[0.06] py-14 text-center mt-12">
     <div class="max-w-6xl mx-auto px-4">
       <div class="font-display font-black text-3xl tracking-tight text-white mb-2">
         MLT
       </div>
-      <div class="text-xs sm:text-sm text-gray-400 font-medium tracking-wider mb-6">
+      <div class="text-xs sm:text-sm text-gray-400 font-medium tracking-wider mb-5">
         Psychology • Web3 • Coding
       </div>
-      <div class="flex justify-center space-x-8 text-sm sm:text-base font-semibold text-gray-300 mb-8">
+      <div class="flex justify-center space-x-7 text-sm sm:text-base font-semibold text-gray-300 mb-7">
         <a href="https://t.me/beloysa" target="_blank" class="hover:text-white transition">Telegram</a>
         <a href="https://instagram.com/your_instagram" target="_blank" class="hover:text-white transition">Instagram</a>
       </div>
@@ -456,6 +468,20 @@
       </p>
     </div>
   </footer>
+
+  <!-- СКРИПТ УПРАВЛЕНИЯ МОБИЛЬНЫМ МЕНЮ -->
+  <script>
+    const burgerBtn = document.getElementById('burger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    burgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    function closeMenu() {
+      mobileMenu.classList.add('hidden');
+    }
+  </script>
 
 </body>
 </html>
