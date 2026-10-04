@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLT TEAM — Telegram Ecosystem & Web3</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            dark: '#08080a',
+            surface: '#111116',
+            surfaceHover: '#16161d',
+            flame: '#ff4b2b',
+            orangeNeon: '#ff9000',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #08080a;
+      color: #f3f4f6;
+    }
+    /* Фоновая сетка как на оригинале */
+    .bg-grid-pattern {
+      background-size: 50px 50px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    /* Фоновые радиальные градиенты свечения */
+    .hero-glow {
+      background: radial-gradient(circle at 50% 10%, rgba(255, 75, 43, 0.16) 0%, rgba(255, 144, 0, 0.05) 45%, transparent 70%);
+    }
+    .card-glow:hover {
+      box-shadow: 0 0 35px -5px rgba(255, 75, 43, 0.15);
+    }
+    .glass-nav {
+      background: rgba(8, 8, 10, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    /* Плавный акцентный градиент для кнопок и текста */
+    .flame-gradient {
+      background: linear-gradient(135deg, #ff4b2b 0%, #ff9000 100%);
+    }
+    .flame-gradient-text {
+      background: linear-gradient(135deg, #ff4b2b 0%, #ff7300 50%, #ff9000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-dark text-gray-100 min-h-screen font-sans selection:bg-flame selection:text-white bg-grid-pattern antialiased relative">
+
+  <!-- Плавающая кнопка Telegram в правом нижнем углу как на оригинале -->
+  <a href="https://t.me/your_telegram" target="_blank" class="fixed bottom-6 right-6 z-50 p-3.5 rounded-full flame-gradient shadow-lg shadow-flame/30 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center text-white" title="Написать нам">
+    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+  </a>
+
+  <!-- Верхняя подсветка -->
+  <div class="absolute top-0 left-0 right-0 h-[600px] hero-glow pointer-events-none -z-10"></div>
+
+  <!-- 1. Навигация (Header) -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-white/[0.06]">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="font-black text-2xl tracking-wider text-white">
+        MLT
+      </a>
+      
+      <nav class="hidden md:flex items-center space-x-8 text-sm text-gray-400 font-medium">
+        <a href="#about" class="hover:text-white transition">О нас</a>
+        <a href="#projects" class="hover:text-white transition">Проекты</a>
+        <a href="#ecosystem" class="hover:text-white transition">Услуги</a>
+        <a href="#contact" class="hover:text-white transition">Контакты</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <a href="https://t.me/your_telegram" target="_blank" class="px-5 py-2 rounded-xl flame-gradient text-white text-xs sm:text-sm font-semibold hover:opacity-90 shadow-md shadow-flame/20 transition active:scale-95">
+          Telegram
+        </a>
+        <a href="https://instagram.com/your_instagram" target="_blank" class="px-5 py-2 rounded-xl bg-surface border border-white/10 hover:border-white/20 text-gray-300 hover:text-white text-xs sm:text-sm font-semibold transition active:scale-95">
+          Instagram
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Главный экран (Hero) -->
+  <main class="max-w-6xl mx-auto px-6 pt-16 md:pt-24 pb-20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Текст слева -->
+      <div class="lg:col-span-7">
+        <!-- Бейдж Telegram Channel -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-flame/10 border border-flame/25 text-orangeNeon mb-6">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+          <span>TELEGRAM CHANNEL</span>
+        </div>
+
+        <h1 class="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[0.95] mb-6">
+          MLT<br/>
+          <span class="flame-gradient-text">TEAM</span>
+        </h1>
+
+        <p class="text-gray-400 text-base sm:text-lg max-w-xl mb-8 leading-relaxed">
+          мы, вместе с командой, создаем телегамм-экосистему, развиваем Web-3 проекты и помогаем людям начать зарабатывать
+        </p>
+
+        <!-- Кнопка Telegram -->
+        <div class="mb-12">
+          <a href="https://t.me/your_telegram" target="_blank" class="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl flame-gradient font-bold text-white shadow-xl shadow-flame/25 hover:shadow-flame/40 hover:-translate-y-0.5 active:translate-y-0 transition duration-200">
+            <span>Telegram</span>
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+          </a>
+        </div>
+
+        <!-- 3 карточки со статистикой -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="bg-surface border border-white/[0.08] p-4 sm:p-5 rounded-2xl">
+            <div class="text-2xl sm:text-3xl font-extrabold text-white">5+</div>
+            <div class="text-xs text-gray-400 mt-1">Проектов</div>
+          </div>
+          <div class="bg-surface border border-white/[0.08] p-4 sm:p-5 rounded-2xl">
+            <div class="text-2xl sm:text-3xl font-extrabold text-white">24/7</div>
+            <div class="text-xs text-gray-400 mt-1">Поддержка</div>
+          </div>
+          <div class="bg-surface border border-white/[0.08] p-4 sm:p-5 rounded-2xl">
+            <div class="text-2xl sm:text-3xl font-extrabold flame-gradient-text">MLT</div>
+            <div class="text-xs text-gray-400 mt-1">экосистема</div>
+          </div>
+        </div>
+
+        <!-- Теги доверия -->
+        <div class="flex flex-wrap gap-3">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface border border-white/[0.08] text-xs font-semibold text-gray-300">
+            <span class="text-orangeNeon">👥</span>
+            <span>MLT Community</span>
+          </div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface border border-white/[0.08] text-xs font-semibold text-gray-300">
+            <span class="text-flame">🛠️</span>
+            <span>Web3 Builder</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Место под фото справа -->
+      <div class="lg:col-span-5 flex justify-center lg:justify-end">
+        <div class="w-full max-w-[420px] aspect-[4/5] rounded-3xl bg-surface border border-white/10 overflow-hidden relative group shadow-2xl shadow-black/80 flex items-center justify-center">
+          <!-- Сюда пользователь просто вставит <img src="..." alt="..."> -->
+          <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent z-10"></div>
+          <div class="text-center p-8 z-0">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-500">
+              <svg class="w-8 h-8 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <p class="text-sm font-semibold text-gray-400">Место для вашего фото</p>
+            <p class="text-xs text-gray-600 font-mono mt-1">&lt;!-- Замените этот блок на тег &lt;img&gt; --&gt;</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. Блок «О нас» -->
+    <section id="about" class="mt-32">
+      <h2 class="text-4xl sm:text-5xl font-black text-center mb-16 tracking-tight">О нас</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Карточка 1: Кто мы -->
+        <div class="bg-surface border border-white/[0.08] p-8 rounded-3xl card-glow transition-all duration-300">
+          <div class="inline-flex items-center gap-2 text-xl font-bold mb-6 text-white">
+            <span>✋</span>
+            <span>Кто мы</span>
+          </div>
+          <p class="text-gray-300 text-base leading-relaxed mb-4">
+            Мы команда <strong>MLT</strong>.
+          </p>
+          <p class="text-gray-400 text-base leading-relaxed mb-4">
+            развиваемся в сфере психологии, Web-3, кодинга и digital-проектов.
+          </p>
+          <p class="text-gray-400 text-base leading-relaxed">
+            Создаем собственную экосистему, объединяем сильных людей и делимся практическим опытом.
+          </p>
+        </div>
+
+        <!-- Карточка 2: Основные направления -->
+        <div class="bg-surface border border-white/[0.08] p-8 rounded-3xl card-glow transition-all duration-300">
+          <div class="inline-flex items-center gap-2 text-xl font-bold mb-6 text-white">
+            <span>🎯</span>
+            <span>Основные направления</span>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3 text-gray-300 font-medium pb-3 border-b border-white/[0.05]">
+              <span class="text-orangeNeon">📈</span>
+              <span>Psychology</span>
+            </li>
+            <li class="flex items-center gap-3 text-gray-300 font-medium pb-3 border-b border-white/[0.05]">
+              <span class="text-flame">🌐</span>
+              <span>Web-3</span>
+            </li>
+            <li class="flex items-center gap-3 text-gray-300 font-medium pb-3 border-b border-white/[0.05]">
+              <span class="text-orangeNeon">🤝</span>
+              <span>MLT community</span>
+            </li>
+            <li class="flex items-center gap-3 text-gray-300 font-medium">
+              <span class="text-flame">🚀</span>
+              <span>Digital Products</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Нижняя плашка «Сейчас развиваем» -->
+      <div class="mt-6 bg-surface border border-white/[0.08] p-8 rounded-3xl text-center">
+        <h3 class="text-xl font-bold mb-6 flex items-center justify-center gap-2 text-white">
+          <span class="text-flame">🚀</span>
+          <span>Сейчас развиваем</span>
+        </h3>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="px-5 py-2.5 rounded-full bg-surfaceHover border border-flame/30 text-sm font-semibold text-gray-200">
+            MLT Community
+          </span>
+          <span class="px-5 py-2.5 rounded-full bg-surfaceHover border border-orangeNeon/30 text-sm font-semibold text-gray-200">
+            Psychology
+          </span>
+          <span class="px-5 py-2.5 rounded-full bg-surfaceHover border border-flame/30 text-sm font-semibold text-gray-200">
+            Telegram Channel
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Блок «Наши проекты» -->
+    <section id="projects" class="mt-32">
+      <h2 class="text-4xl sm:text-5xl font-black text-center mb-16 tracking-tight">Наши проекты</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Карточка слева (MLT Community) -->
+        <div class="bg-surface border border-white/[0.08] p-8 rounded-3xl hover:border-flame/50 transition-all duration-300 card-glow flex flex-col justify-between group">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-flame/10 border border-flame/20 flex items-center justify-center text-flame mb-6 text-xl">
+              🚀
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-orangeNeon transition">
+              MLT Community
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              Сообщество для тех, кто развивается в психологии, Web3 и кодинге. Новости рынка, аналитика, образовательные материалы и совместное развитие.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="px-3 py-1 rounded-lg bg-surfaceHover border border-white/5 text-xs font-mono text-gray-300">Psychology</span>
+              <span class="px-3 py-1 rounded-lg bg-surfaceHover border border-white/5 text-xs font-mono text-gray-300">Web3</span>
+              <span class="px-3 py-1 rounded-lg bg-surfaceHover border border-white/5 text-xs font-mono text-gray-300">Coding</span>
+            </div>
+          </div>
+          <div>
+            <a href="https://t.me/your_telegram" class="inline-flex items-center gap-2 text-sm font-bold text-gray-300 group-hover:text-flame transition">
+              <span>Подробнее</span>
+              <span class="group-hover:translate-x-1 transition duration-200">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Пустая заготовка справа под будущий проект -->
+        <div class="hidden md:flex border border-dashed border-white/10 rounded-3xl p-8 items-center justify-center text-center">
+          <div class="text-gray-600 text-sm font-mono">
+            + Свободное место под следующий проект
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Блок «Экосистема MLT» (5 плашек: 3 сверху, 2 снизу) -->
+    <section id="ecosystem" class="mt-32">
+      <h2 class="text-4xl sm:text-5xl font-black text-center mb-16 tracking-tight">Экосистема MLT</h2>
+
+      <!-- Сетка плашек -->
+      <div class="space-y-6">
+        <!-- Верхний ряд: 3 плашки -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-surface border border-white/[0.08] p-8 rounded-3xl min-h-[220px] flex flex-col justify-between hover:border-flame/40 transition card-glow">
+            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-500">01</div>
+            <p class="text-xs text-gray-500 font-mono">[ Свободная плашка 1 ]</p>
+          </div>
+          <div class="bg-surface border border-white/[0.08] p-8 rounded-3xl min-h-[220px] flex flex-col justify-between hover:border-orangeNeon/40 transition card-glow">
+            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-500">02</div>
+            <p class="text-xs text-gray-500 font-mono">[ Свободная плашка 2 ]</p>
+          </div>
+          <div class="bg-surface border border-white/[0.08] p-8 rounded-3xl min-h-[220px] flex flex-col justify-between hover:border-flame/40 transition card-glow">
+            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-500">03</div>
+            <p class="text-xs text-gray-500 font-mono">[ Свободная плашка 3 ]</p>
+          </div>
+        </div>
+
+        <!-- Нижний ряд: 2 плашки в ширину -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-surface border border-white/[0.08] p-8 rounded-3xl min-h-[220px] flex flex-col justify-between hover:border-orangeNeon/40 transition card-glow">
+            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-500">04</div>
+            <p class="text-xs text-gray-500 font-mono">[ Свободная плашка 4 ]</p>
+          </div>
+          <div class="bg-surface border border-white/[0.08] p-8 rounded-3xl min-h-[220px] flex flex-col justify-between hover:border-flame/40 transition card-glow">
+            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-mono text-gray-500">05</div>
+            <p class="text-xs text-gray-500 font-mono">[ Свободная плашка 5 ]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Блок «Свяжитесь с нами» -->
+    <section id="contact" class="mt-32">
+      <div class="bg-surface border border-white/[0.08] p-10 sm:p-16 rounded-3xl text-center max-w-4xl mx-auto relative overflow-hidden card-glow">
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-flame/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 mb-6">
+          <span>📩</span>
+          <span>Всегда на связи</span>
+        </div>
+
+        <h2 class="text-4xl sm:text-5xl font-black mb-6 tracking-tight text-white">
+          Свяжитесь с нами
+        </h2>
+
+        <p class="text-gray-400 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed font-light">
+          По вопросам сотрудничества, партнерства, рекламы или участия в проектах — пишите в Telegram или Instagram. Отвечаем лично.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="https://t.me/your_telegram" target="_blank" class="px-8 py-4 rounded-xl flame-gradient font-bold text-white shadow-xl shadow-flame/25 hover:opacity-90 active:scale-95 transition">
+            Telegram
+          </a>
+          <a href="https://instagram.com/your_instagram" target="_blank" class="px-8 py-4 rounded-xl bg-surfaceHover border border-white/10 hover:border-white/20 font-bold text-gray-200 active:scale-95 transition">
+            Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 7. Конец сайта (Футер) -->
+  <footer class="border-t border-white/[0.06] py-14 text-center">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="font-black text-2xl tracking-wider text-white mb-2">
+        MLT
+      </div>
+      <div class="text-xs text-gray-400 font-medium tracking-wide mb-5">
+        Psychology • Web3 • Coding
+      </div>
+      <div class="flex justify-center space-x-6 text-sm font-semibold text-gray-400 mb-8">
+        <a href="https://t.me/your_telegram" target="_blank" class="hover:text-white transition">Telegram</a>
+        <a href="https://instagram.com/your_instagram" target="_blank" class="hover:text-white transition">Instagram</a>
+      </div>
+      <p class="text-xs text-gray-600">
+        © 2026 MLT. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
